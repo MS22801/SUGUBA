@@ -1,0 +1,47 @@
+name: Build SUGUBA MALI
+
+on:
+  push:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+
+    steps:
+
+      - name: تحميل المشروع
+        uses: actions/checkout@v4
+
+
+      - name: إعداد Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 'stable'
+          channel: stable
+
+
+      - name: تثبيت الحزم
+        run: flutter pub get
+
+
+      - name: فحص Flutter
+        run: flutter doctor
+
+
+      - name: بناء Android APK
+        run: flutter build apk --release
+
+
+      - name: حفظ APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: suguba-mali-apk
+          path: build/app/outputs/flutter-apk/app-release.apk
