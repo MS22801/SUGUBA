@@ -1,0 +1,8 @@
++223 XXXXXXXX
+Firestore
+   users
+      userId
+          phone
+          role
+          createdAt
+HomeScreen
